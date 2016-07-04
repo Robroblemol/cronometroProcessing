@@ -1,7 +1,7 @@
 void datoVelocidad(char startC){
 if(startC=='@'){
       nPoints = 10;
-       plot.getYAxis().getAxisLabel().setText("m/s");//titulo eje Y
+       //plot.getYAxis().getAxisLabel().setText("m/s");//titulo eje Y
        //plot.defaultDraw();
           plot.setPoints(new GPointsArray());
           
@@ -21,11 +21,17 @@ if(startC=='@'){
         V=anCad.substring(21,26);
         //println("TF: "+TF);
       }
-      for(int i = 0; i < nPoints; i++){
-        points.add(i,float(V));//agregamos como tipo float
-      }
+        GPointsArray pointsV = new GPointsArray(nPoints);
+        String TFG=TF;
+        //TFG=TFG.substring(4,(TFG.length()));
+        points.add(0,0);
+        points.add(float(TFG),float(V));//agregamos como tipo float
+        pointsV.add(0,float(V));
+        pointsV.add(float(TFG),float(V));
+        
       plot.setPoints(points);
-      points.removeRange(0,nPoints);
+      plot1.setPoints(pointsV);
+     // points.removeRange(0,nPoints);
       anCad=" ";
       startC=' ';
     }
