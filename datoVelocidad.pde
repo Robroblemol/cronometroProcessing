@@ -4,21 +4,38 @@ if(startC=='@'){
        //plot.getYAxis().getAxisLabel().setText("m/s");//titulo eje Y
        //plot.defaultDraw();
           plot.setPoints(new GPointsArray());
+          GPointsArray points = new GPointsArray(nPoints);
+          A="0.000";
           
       if(anCad.substring(2,4).equals("TF")==true){
-        TF=anCad.substring(4,5);
+        //(4,6)
+        TF=anCad.substring(4,6);
+        //TF=anCad.substring(4,5);
         //println("TF: "+TF);
       }
-      if(anCad.substring(5,7).equals("AF")==true){
-        AF=anCad.substring(7,9);
+      
+      //(6,9)
+      if(anCad.substring(6,8).equals("AF")==true){
+      //if(anCad.substring(5,7).equals("AF")==true){
+        //(9,11)
+        AF=anCad.substring(8,11);
+        //AF=anCad.substring(7,9);
         //println("TF: "+TF);
       }
-      if(anCad.substring(9,11).equals("TT")==true){
-        TT=anCad.substring(11,20);
+      //(10,12)
+      if(anCad.substring(11,13).equals("TT")==true){
+      //if(anCad.substring(9,11).equals("TT")==true){
+        //(12,21)
+        TT=anCad.substring(13,22);
+        //TT=anCad.substring(11,20);
         //println("TF: "+TF);
       }
-       if(anCad.substring(20,21).equals("V")==true){
-        V=anCad.substring(21,26);
+      //(21,22)
+      if(anCad.substring(22,23).equals("V")==true){
+       //if(anCad.substring(20,21).equals("V")==true){
+         //(22,26)
+         V=anCad.substring(23,28);
+        //V=anCad.substring(21,26);
         //println("TF: "+TF);
       }
         GPointsArray pointsV = new GPointsArray(nPoints);
@@ -31,7 +48,7 @@ if(startC=='@'){
         
       plot.setPoints(points);
       plot1.setPoints(pointsV);
-     // points.removeRange(0,nPoints);
+      //points.removeRange(0,1);
       anCad=" ";
       startC=' ';
     }

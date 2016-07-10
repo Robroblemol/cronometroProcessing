@@ -27,8 +27,10 @@ void setup(){
   plot.getTitle().setText("x s t");//titulo de grafico
   plot.getXAxis().getAxisLabel().setText("t(s)");//titulo eje X
   plot.getYAxis().getAxisLabel().setText("x(m)");//titulo eje Y
-
+ //plot.getXAxis().setNTicks(10);
+  //plot.activatePanning();
   plot.activatePointLabels();
+  //plot.activateZooming(1.5);
   
    plot1 = new GPlot(this);// creamos la grafica
   plot1.setPos(550, 300);//ajustamos la posicion
@@ -36,9 +38,9 @@ void setup(){
   plot1.getTitle().setText("v s t");//titulo de grafico
   plot1.getXAxis().getAxisLabel().setText("t (s)");//titulo eje X
   plot1.getYAxis().getAxisLabel().setText("v (m/s)");//titulo eje Y
-
+  //plot1.activatePanning();
   plot1.activatePointLabels();
-   // plot.activateZooming(1.5); // activamos zoom con el mouse
+  //plot1.activateZooming(1.5); // activamos zoom con el mouse
 }
 
 void draw(){
@@ -91,6 +93,7 @@ void draw(){
     plot.drawGridLines(GPlot.BOTH);// grilla 
     plot.drawLines();// uso de lineas 
     plot.drawPoints();// uso de puntos
+    plot.drawLabels();// pintamos la etiquetas
     plot.endDraw();// finaliza el dibujo de la grafica
     
     plot1.beginDraw();
@@ -102,6 +105,7 @@ void draw(){
     plot1.drawGridLines(GPlot.BOTH);
     plot1.drawLines();
     plot1.drawPoints();
+    plot1.drawLabels();
     plot1.endDraw();
 
     
