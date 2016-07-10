@@ -42,39 +42,39 @@ void setup(){
 }
 
 void draw(){
-  background(162,160,160);
-  if(myPort.available()>1){
-    Cad=myPort.readString();
-    anCad+=Cad;
+  background(162,160,160);// ajustamos color de fondo
+  if(myPort.available()>1){// si el puerto serie esta habilido
+    Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
+    anCad+=Cad;// lo concatenamos a lo recivido anteriormente
     //println (""+anCad);
     lastC=anCad.charAt(anCad.length()-1);//comparamos el final de la trama
-    if(lastC=='%'){
-      flagdatV = true;
-    }else if (lastC=='!'){
-      flagdatA = true;
+    if(lastC=='%'){// si es igual a %
+      flagdatV = true;// los datos recividos son de velocidad
+    }else if (lastC=='!'){// si es igual a !
+      flagdatA = true;// los datos son de aceleracion
     }
   }
    // println (""+Cad);
-  if(flagdatV == true){
-    println (anCad); 
+  if(flagdatV == true){// si los datos son de velocidad
+    println (anCad); // imprimimos datos por consola
     println (anCad.charAt(1));
-    flagdatV = false;
-    startC=anCad.charAt(1);
-    datoVelocidad(startC);
+    flagdatV = false;// flagdatv vuelve a falso
+    startC=anCad.charAt(1);//sacamos el primer caracter del string
+    datoVelocidad(startC);// lo enviamos a la funcion velocidad
   }
-  if(flagdatA == true){
-    println (anCad); 
+  if(flagdatA == true){//si los datos son de aceleracion
+    println (anCad); //imprimimos datos por consola 
    // println (anCad.charAt(1));
-    flagdatA = false;
-    startC=anCad.charAt(1);
-    datoAceleracion(startC);
+    flagdatA = false;//flagdatv vuelve a falso
+    startC=anCad.charAt(1);//sacamos el primer caracter del string
+    datoAceleracion(startC);//lo enviamos a la funcion velocidad
   }
     //println("startC: "+startC);
-    color c = color (0);
-    fill (c);
-    textSize(55);
-    text("Cronometro de Laboratorio",148,100);
-    textSize(20);
+    color c = color (0);// variable de color para el texto
+    fill (c);// lo que escibamos a partir de aqui tendrá colo negro
+    textSize(55);//asignamos tamaño del texto para el titulo
+    text("Cronometro de Laboratorio",148,100);// titulo con su posicion
+    textSize(20);// asignamos tamaño para el resto del texto
     text("Total de Fanjas: "+TF,220,179);
     text("Ancho de Fanjas: "+AF+" mm",220,214);
     text("Tiempo Total: "+TT,533,179);
@@ -82,18 +82,18 @@ void draw(){
     text("Aceleracion: "+A+"m/s",220,247);
     
      //plot.defaultDraw();
-    plot.beginDraw();
-    plot.drawBackground();
-    plot.drawBox();
-    plot.drawXAxis();
-    plot.drawYAxis();
-    plot.drawTitle();
-    plot.drawGridLines(GPlot.BOTH);
-    plot.drawLines();
-    plot.drawPoints();
-    plot.endDraw();
+    plot.beginDraw();// iniciamos dibujo de grafica
+    plot.drawBackground();// pintamos el fondo por defecto (blanco)
+    plot.drawBox();//dibujamos la caja que nontiene la grafica
+    plot.drawXAxis();// eje X
+    plot.drawYAxis();// eje y
+    plot.drawTitle();// titulo de grafico
+    plot.drawGridLines(GPlot.BOTH);// grilla 
+    plot.drawLines();// uso de lineas 
+    plot.drawPoints();// uso de puntos
+    plot.endDraw();// finaliza el dibujo de la grafica
     
-        plot1.beginDraw();
+    plot1.beginDraw();
     plot1.drawBackground();
     plot1.drawBox();
     plot1.drawXAxis();
@@ -103,6 +103,6 @@ void draw(){
     plot1.drawLines();
     plot1.drawPoints();
     plot1.endDraw();
-    //println (""+Cad);
+
     
 }
