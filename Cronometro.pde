@@ -1,5 +1,6 @@
-import grafica.*;//libreria serial
-import processing.serial.*;//
+import grafica.*;//libreria grafica
+import processing.serial.*;//libreria serial
+import static javax.swing.JOptionPane.*;//mensajes emergentes
 
  GPlot plot; // declaro objeto grafica
  GPlot plot1; // declaro objeto grafica
@@ -9,18 +10,51 @@ int nPoints = 6; // numero de puntos tipo entero
 String Cad,anCad=" ",TF="1",AF="10",TT= "00:00:000",TP="",V= "0.000",A = "0.000";
 // indicadores para tipo de medicion Velovidad o Aceleracion
 boolean flagdatV =false,flagdatA = false;
+final boolean debug = true;
 char lastC,startC;// variables para almacenar el ultimo caracter y el primero
 public PShape star;
 GPointsArray points = new GPointsArray(nPoints);// declaramos el array de puntos
 GPointsArray points1 = new GPointsArray(nPoints);
+
 void setup(){
-  
+  String COMx,COMlist = "";
   size(1050,650);// tamaño en pantalla de la aplicacion
   
-  String portName = Serial.list()[0]; 
-  printArray(Serial.list());
-  myPort = new Serial(this, portName, 9600);  
-  
+  try{
+  if(debug) printArray(Serial.list());
+  int i = Serial.list().length; 
+    if (i != 0) {
+      if (i >= 2) {
+        //si tenemos mas de un puerto
+        for (int j = 0; j < i;) {// guardamos en el String el nombre de cada COM
+          COMlist += char(j+'a') + " = " + Serial.list()[j];
+          if (++j < i) COMlist += ",  ";
+        }
+        //solicitamos al usuario elegir el puerto a usar
+        COMx = showInputDialog("¿A que puerto se desea conectar? (a,b,..):\n"+COMlist);
+        if (COMx == null) exit();//si no escribo nada cierra aplicacion
+        if (COMx.isEmpty()) exit();
+        //Convertimos a entero 
+        //lo que se hace es quitarle el 
+        //valor de letra en string
+        i = int(COMx.toLowerCase().charAt(0) - 'a') + 1;
+      }
+      String portName = Serial.list()[i-1];// asignamos el nombre de puerto
+      if(debug) println(portName);
+      myPort = new Serial(this, portName, 9600); // asignamos velocidad de tranferencia
+      myPort.bufferUntil('\n'); //Borramos el buffer de recepcion
+    }
+    else {
+      showMessageDialog(frame,"El dispocitivo no esta conectado al PC");
+      exit();
+    }
+  }
+  catch (Exception e){
+    showMessageDialog(frame,"Puerto COM no disponible");
+    println("Error:", e);
+    exit();
+  }
+   
   plot = new GPlot(this);// creamos la grafica
   plot.setPos(50, 300);//ajustamos la posicion
   plot.setDim(350, 225);//dimencion de la ventana
@@ -75,13 +109,13 @@ void draw(){
     color c = color (0);// variable de color para el texto
     fill (c);// lo que escibamos a partir de aqui tendrá colo negro
     textSize(55);//asignamos tamaño del texto para el titulo
-    text("Cronometro de Laboratorio",148,100);// titulo con su posicion
+    text("Cronómetro de Laboratorio",148,100);// titulo con su posicion
     textSize(20);// asignamos tamaño para el resto del texto
     text("Total de Fanjas: "+TF,220,179);
     text("Ancho de Fanjas: "+AF+" mm",220,214);
     text("Tiempo Total: "+TT,533,179);
     text("Velocidad: "+V+" m/s",533,214);
-    text("Aceleracion: "+A+"m/s",220,247);
+    text("Aceleración: "+A+"m/s",220,247);
     
      //plot.defaultDraw();
     plot.beginDraw();// iniciamos dibujo de grafica

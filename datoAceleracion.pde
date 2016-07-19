@@ -86,19 +86,23 @@ if(startC=='@'){
       GPointsArray pointsV = new GPointsArray(nPoints);
       
       float t,x,v0,vt,a = float (A);
-      //v0=((float(AF)/1000)/(pointsA.getY(1)-pointsA.getY(0)));
-      v0=((float(AF))/(pointsA.getY(1)-pointsA.getY(0)));
-      for (int i = 0; i <nPoints; i++){
+      v0=((float(AF)/1000)/(pointsA.getY(1)/1000)-(pointsA.getY(0)/1000));
+      //v0=((float(AF))/(pointsA.getY(1)-pointsA.getY(0)));
+      //v0=v0/1000;
+      for (int i = 1; i <=nPoints; i++){
         t = pointsA.getY(i);
-        //t = t/100;
+        t = t/1000;
+         //v0=((float(AF)/1000)/(pointsA.getY(i+1)/1000)-t);
         //v0=((float(AF))/(pointsA.getY(i+1)-t));
         x=((a*(t*t))/2+v0*t);
         vt=((a*t)+v0);
+        //t=t/1000;
+        //x=x/1000;
         pointsX.add(t,x,"t: "+t+", x: "+x);
         pointsV.add(t,vt,"t: "+t+", vt: "+vt);
         println("x: "+x+" t: "+t+" vt: "+vt);
       }
- 
+        println("a: "+a);
           
       //plot.setPoints(pointsA);
       plot1.setPoints(pointsV);
