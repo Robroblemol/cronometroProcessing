@@ -92,13 +92,10 @@ if(startC=='@'){
       for (int i = 1; i <=nPoints; i++){
         t = pointsA.getY(i);
         t = t/1000;
-         //v0=((float(AF)/1000)/(pointsA.getY(i+1)/1000)-t);
-        //v0=((float(AF))/(pointsA.getY(i+1)-t));
         //x=((a*(t*t))/2+v0*t);
         x=((float(AF)/1000)*i);
-        vt=((a*t)+v0);
-        //t=t/1000;
-        //x=x/1000;
+        //vt=((a*t)+v0);
+        vt=((float(AF)/1000)*i)/t; 
         pointsX.add(t,x,"t: "+t+", x: "+x);
         pointsV.add(t,vt,"t: "+t+", vt: "+vt);
         //println("x: "+x+" t: "+t+" vt: "+vt);

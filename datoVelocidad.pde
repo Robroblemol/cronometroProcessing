@@ -39,12 +39,15 @@ if(startC=='@'){
         //println("TF: "+TF);
       }
         GPointsArray pointsV = new GPointsArray(nPoints);
-        String TFG=TF;
-        //TFG=TFG.substring(4,(TFG.length()));
-        points.add(0,0);
-        points.add(float(TFG),float(V));//agregamos como tipo float
-        pointsV.add(0,float(V));
-        pointsV.add(float(TFG),float(V));
+        String TFG=TT;
+        TFG=(TFG.substring(6,(TFG.length())));
+        float TF = float(TFG)/1000;
+        println("TFG: "+TF);
+        points.add(0,0,"t: 0, v: 0");
+        points.add(TF,float(V),"t: "+TF+", v: "+V);//agregamos como tipo float
+        pointsV.add(0,float(V),"t: 0, v: "+V);
+        pointsV.add(TF,float(V),"t: "+TF+" v: "+V);
+        
         
       plot.setPoints(points);
       plot1.setPoints(pointsV);
