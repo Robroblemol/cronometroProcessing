@@ -42,7 +42,7 @@ if(startC=='@'){
       String axuCad;
       if(anCad.substring(22,24).equals("TP")==true){
       //if(anCad.substring(20,22).equals("TP")==true){
-       //  println("Entre a TP");
+       //  prin  tln("Entre a TP");
         // println("length: "+anCad.length());
         for(int i = 0; i <= nPoints; i++){
    
@@ -94,13 +94,15 @@ if(startC=='@'){
         t = t/1000;
          //v0=((float(AF)/1000)/(pointsA.getY(i+1)/1000)-t);
         //v0=((float(AF))/(pointsA.getY(i+1)-t));
-        x=((a*(t*t))/2+v0*t);
+        //x=((a*(t*t))/2+v0*t);
+        x=((float(AF)/1000)*i);
         vt=((a*t)+v0);
         //t=t/1000;
         //x=x/1000;
         pointsX.add(t,x,"t: "+t+", x: "+x);
         pointsV.add(t,vt,"t: "+t+", vt: "+vt);
-        println("x: "+x+" t: "+t+" vt: "+vt);
+        //println("x: "+x+" t: "+t+" vt: "+vt);
+        println("x: "+x+" t: "+t);
       }
         println("a: "+a);
           

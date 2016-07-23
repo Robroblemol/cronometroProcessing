@@ -58,7 +58,7 @@ void setup(){
   plot = new GPlot(this);// creamos la grafica
   plot.setPos(50, 300);//ajustamos la posicion
   plot.setDim(350, 225);//dimencion de la ventana
-  plot.getTitle().setText("x s t");//titulo de grafico
+  plot.getTitle().setText("x(t) vs t");//titulo de grafico
   plot.getXAxis().getAxisLabel().setText("t(s)");//titulo eje X
   plot.getYAxis().getAxisLabel().setText("x(m)");//titulo eje Y
  //plot.getXAxis().setNTicks(10);
@@ -69,7 +69,7 @@ void setup(){
    plot1 = new GPlot(this);// creamos la grafica
   plot1.setPos(550, 300);//ajustamos la posicion
   plot1.setDim(350, 225);//dimencion de la ventana
-  plot1.getTitle().setText("v s t");//titulo de grafico
+  plot1.getTitle().setText("v(t) vs t");//titulo de grafico
   plot1.getXAxis().getAxisLabel().setText("t (s)");//titulo eje X
   plot1.getYAxis().getAxisLabel().setText("v (m/s)");//titulo eje Y
   //plot1.activatePanning();
@@ -108,14 +108,14 @@ void draw(){
     //println("startC: "+startC);
     color c = color (0);// variable de color para el texto
     fill (c);// lo que escibamos a partir de aqui tendrá colo negro
-    textSize(55);//asignamos tamaño del texto para el titulo
-    text("Cronómetro de Laboratorio",148,100);// titulo con su posicion
+    textSize(47);//asignamos tamaño del texto para el titulo
+    text("Resultados y Gráficos de los Datos Medidos ",32,100);// titulo con su posicion
     textSize(20);// asignamos tamaño para el resto del texto
-    text("Total de Fanjas: "+TF,220,179);
+    text("Total de Fanjas Oscuras: "+TF,220,179);
     text("Ancho de Fanjas: "+AF+" mm",220,214);
     text("Tiempo Total: "+TT,533,179);
     text("Velocidad: "+V+" m/s",533,214);
-    text("Aceleración: "+A+"m/s",220,247);
+    text("Aceleración: "+A+"m/s2",220,247);
     
      //plot.defaultDraw();
     plot.beginDraw();// iniciamos dibujo de grafica
