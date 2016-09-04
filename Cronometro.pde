@@ -115,7 +115,9 @@ void draw(){
     text("Ancho de Fanjas: "+AF+" mm",220,214);
     text("Tiempo Total: "+TT,533,179);
     text("Velocidad: "+V+" m/s",533,214);
-    text("Aceleración: "+A+"m/s2",220,247);
+    text("Aceleración: "+A+"m/s",220,247);
+    textSize(10);
+    text("2",441,238);
     
      //plot.defaultDraw();
     plot.beginDraw();// iniciamos dibujo de grafica

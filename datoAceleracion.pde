@@ -85,29 +85,45 @@ if(startC=='@'){
       GPointsArray pointsX = new GPointsArray(nPoints);
       GPointsArray pointsV = new GPointsArray(nPoints);
       
-      float t,x,v0,vt,a = float (A);
-      v0=((float(AF)/1000)/(pointsA.getY(1)/1000)-(pointsA.getY(0)/1000));
+      float t,x,v0,vi,vt,a = float (A),h=(float(AF)/1000);
+      
+      v0=((float(AF)/1000)/((pointsA.getY(1)/1000)-(pointsA.getY(0)/1000)));
+      //v0=(h/((pointsA.getY(1)/1000)/2));
       //v0=((float(AF))/(pointsA.getY(1)-pointsA.getY(0)));
-      //v0=v0/1000;
-      for (int i = 1; i <=nPoints; i++){
+      vi=((2*h)/(pointsA.getY(1)/1000));
+      for (int i = 0; i <=nPoints; i++){
         t = pointsA.getY(i);
         t = t/1000;
-        //x=((a*(t*t))/2+v0*t);
-        x=((float(AF)/1000)*i);
-        //vt=((a*t)+v0);
-        vt=((float(AF)/1000)*i)/t; 
+        x=(((a*(t*t))/2)+v0*t);
+        //vt=((a*t)+vi);
+        vt=((a*t)+v0);
+        //x=((float(AF)/1000)*i);
+        x=redondear(x);
+        vt=redondear(vt);
         pointsX.add(t,x,"t: "+t+", x: "+x);
         pointsV.add(t,vt,"t: "+t+", vt: "+vt);
-        //println("x: "+x+" t: "+t+" vt: "+vt);
         println("x: "+x+" t: "+t);
+        //println(""+t);
       }
-        println("a: "+a);
+ /*     x=(float(AF)/1000);
+     //calculo de velocidad
+       for (int i = 1; i <nPoints; i++){
+         //vt=(pointsX.getY(i-1)-pointsX.getY(i))/(pointsX.getX(i-1)-pointsX.getX(i));
+         //vt=x/(pointsX.getX(i)-pointsX.getX(i-1));
+         //vt=x/(((pointsX.getX(i)-pointsX.getX(i-1)))/2);
+        
+         vt=redondear(vt);
+         pointsV.add(pointsX.getX(i-1),vt,"t: "+pointsX.getX(i-1)+", vt: "+vt);
+          println("vt: "+vt+" t: "+pointsX.getX(i-1));    
+     }*/
           
-      //plot.setPoints(pointsA);
       plot1.setPoints(pointsV);
       plot.setPoints(pointsX);
       //points.removeRange(0,nPoints);   
       anCad=" ";
       startC=' ';
     }
+}
+float redondear (float x){
+ return round(x*1000.0f)/1000.0f;
 }
