@@ -1,10 +1,11 @@
 import grafica.*;//libreria grafica
 import processing.serial.*;//libreria serial
 import static javax.swing.JOptionPane.*;//mensajes emergentes
+import g4p_controls.*;//importamos libreria
 
  GPlot plot; // declaro objeto grafica
  GPlot plot1; // declaro objeto grafica
- Serial myPort;// declaro pbjeto puerto serie 
+ Serial myPort;// declaro pbjeto puerto serie
 int nPoints = 6; // numero de puntos tipo entero
 //variables String para almacenar los datos enviados por el arduino
 String Cad,anCad=" ",TF="1",AF="10",TT= "00:00:000",TP="",V= "0.000",A = "0.000";
@@ -15,14 +16,19 @@ char lastC,startC;// variables para almacenar el ultimo caracter y el primero
 public PShape star;
 GPointsArray points = new GPointsArray(nPoints);// declaramos el array de puntos
 GPointsArray points1 = new GPointsArray(nPoints);
+// agregamos boton para salvar los datos en .CSV
+GButton bSalvar = new GButton(this,340,45,100,35,"Salvar");
+//bSalvar.fireAllEvents(true);
+Table tabla;// declaro objeto tipo tabla
+TableRow newRow;
 
 void setup(){
   String COMx,COMlist = "";
   size(1050,650);// tamaño en pantalla de la aplicacion
-  
+
   try{
   if(debug) printArray(Serial.list());
-  int i = Serial.list().length; 
+  int i = Serial.list().length;
     if (i != 0) {
       if (i >= 2) {
         //si tenemos mas de un puerto
@@ -34,8 +40,8 @@ void setup(){
         COMx = showInputDialog("¿A que puerto se desea conectar? (a,b,..):\n"+COMlist);
         if (COMx == null) exit();//si no escribo nada cierra aplicacion
         if (COMx.isEmpty()) exit();
-        //Convertimos a entero 
-        //lo que se hace es quitarle el 
+        //Convertimos a entero
+        //lo que se hace es quitarle el
         //valor de letra en string
         i = int(COMx.toLowerCase().charAt(0) - 'a') + 1;
       }
@@ -54,7 +60,7 @@ void setup(){
     println("Error:", e);
     exit();
   }
-   
+
   plot = new GPlot(this);// creamos la grafica
   plot.setPos(50, 300);//ajustamos la posicion
   plot.setDim(350, 225);//dimencion de la ventana
@@ -65,7 +71,7 @@ void setup(){
   //plot.activatePanning();
   plot.activatePointLabels();
   //plot.activateZooming(1.5);
-  
+
    plot1 = new GPlot(this);// creamos la grafica
   plot1.setPos(550, 300);//ajustamos la posicion
   plot1.setDim(350, 225);//dimencion de la ventana
@@ -99,7 +105,7 @@ void draw(){
     datoVelocidad(startC);// lo enviamos a la funcion velocidad
   }
   if(flagdatA == true){//si los datos son de aceleracion
-    println (anCad); //imprimimos datos por consola 
+    println (anCad); //imprimimos datos por consola
    // println (anCad.charAt(1));
     flagdatA = false;//flagdatv vuelve a falso
     startC=anCad.charAt(1);//sacamos el primer caracter del string
@@ -118,7 +124,7 @@ void draw(){
     text("Aceleración: "+A+"m/s",220,247);
     textSize(10);
     text("2",441,238);
-    
+
      //plot.defaultDraw();
     plot.beginDraw();// iniciamos dibujo de grafica
     plot.drawBackground();// pintamos el fondo por defecto (blanco)
@@ -126,12 +132,12 @@ void draw(){
     plot.drawXAxis();// eje X
     plot.drawYAxis();// eje y
     plot.drawTitle();// titulo de grafico
-    plot.drawGridLines(GPlot.BOTH);// grilla 
-    plot.drawLines();// uso de lineas 
+    plot.drawGridLines(GPlot.BOTH);// grilla
+    plot.drawLines();// uso de lineas
     plot.drawPoints();// uso de puntos
     plot.drawLabels();// pintamos la etiquetas
     plot.endDraw();// finaliza el dibujo de la grafica
-    
+
     plot1.beginDraw();
     plot1.drawBackground();
     plot1.drawBox();
@@ -144,5 +150,12 @@ void draw(){
     plot1.drawLabels();
     plot1.endDraw();
 
-    
+
+}
+void handleButtonEvents(GButton Botton,GEvent event){
+  String save = "new";
+ if(Botton == bSalvar && event == GEvent.PRESSED){
+   save = showInputDialog("Digite nombre para guardar datoss");
+   saveTable(tabla,"data/"+save+".csv");
+ }
 }
