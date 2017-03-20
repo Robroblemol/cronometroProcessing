@@ -6,6 +6,7 @@ import g4p_controls.*;//importamos libreria
  GPlot plot; // declaro objeto grafica
  GPlot plot1; // declaro objeto grafica
  Serial myPort;// declaro pbjeto puerto serie
+ GButton bSalvar;
 int nPoints = 6; // numero de puntos tipo entero
 //variables String para almacenar los datos enviados por el arduino
 String Cad,anCad=" ",TF="1",AF="10",TT= "00:00:000",TP="",V= "0.000",A = "0.000";
@@ -16,9 +17,6 @@ char lastC,startC;// variables para almacenar el ultimo caracter y el primero
 public PShape star;
 GPointsArray points = new GPointsArray(nPoints);// declaramos el array de puntos
 GPointsArray points1 = new GPointsArray(nPoints);
-// agregamos boton para salvar los datos en .CSV
-GButton bSalvar = new GButton(this,340,45,100,35,"Salvar");
-//bSalvar.fireAllEvents(true);
 Table tabla;// declaro objeto tipo tabla
 TableRow newRow;
 
@@ -60,6 +58,14 @@ void setup(){
     println("Error:", e);
     exit();
   }
+  // agregamos boton para salvar los datos en .CSV
+  bSalvar = new GButton(this,340,45,100,35,"Salvar");
+  bSalvar.fireAllEvents(true);
+
+  tabla = new Table();// constructor of tabla Object
+  tabla.addColumn("Time");
+  tabla.addColumn("Volts");//Add columns
+  newRow = tabla.addRow();// add Row
 
   plot = new GPlot(this);// creamos la grafica
   plot.setPos(50, 300);//ajustamos la posicion
