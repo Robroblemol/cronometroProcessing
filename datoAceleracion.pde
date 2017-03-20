@@ -1,11 +1,11 @@
 void datoAceleracion(char startC){
 if(startC=='@'){
-  
+
       //nPoints = 10;
        //plot.getYAxis().getAxisLabel().setText("m/s");//titulo eje Y
        //plot.defaultDraw();
        V="0.00";
-       
+
           plot.setPoints(new GPointsArray());
           //(2,5)
           //(5,6)
@@ -16,11 +16,11 @@ if(startC=='@'){
           TF=""+int(TF);//eliminamos el cero anterior
         //println("TF: "+TF);
       }
-      
+
       nPoints = int (TF);
       nPoints=(nPoints*2)-1;
       GPointsArray pointsA = new GPointsArray(nPoints);
- 
+
 
       if(anCad.substring(6,8).equals("AF")==true){
       //if(anCad.substring(5,7).equals("AF")==true){
@@ -37,7 +37,7 @@ if(startC=='@'){
         //println("TT: "+TT);
       }
       //(23,25)
-      //int = 22 
+      //int = 22
       int r=24;
       String axuCad;
       if(anCad.substring(22,24).equals("TP")==true){
@@ -45,7 +45,7 @@ if(startC=='@'){
        //  prin  tln("Entre a TP");
         // println("length: "+anCad.length());
         for(int i = 0; i <= nPoints; i++){
-   
+
               if(anCad.substring(r,(r+1)).equals("f")){
               TP="";
               r++;
@@ -53,21 +53,21 @@ if(startC=='@'){
               while((axuCad.equals("f")!=true) && (axuCad.equals("A")!=true)){
                 if(r<(anCad.length())-1){
                   TP=TP+anCad.substring(r,(r+1));
-                }               
+                }
                 r++;
                 axuCad=anCad.substring(r,(r+1));
               }
               }
               //r++;
-              //println("r: "+r); 
+              //println("r: "+r);
               //println("TP: "+TP);
               //r=r+9;
-              
-              pointsA.add(i,float(TP));//agregamos como tipo float
+
+              pointsA.add(i,float(TP));//agregamos como tipo floa
               //points1.add()
       }
       }
-      
+
   //    println(anCad.substring(r,(r+1)));
       if(anCad.substring(r,(r+1)).equals("A")){
         A="";
@@ -84,9 +84,9 @@ if(startC=='@'){
       }
       GPointsArray pointsX = new GPointsArray(nPoints);
       GPointsArray pointsV = new GPointsArray(nPoints);
-      
+
       float t,x,v0,vi,vt,a = float (A),h=(float(AF)/1000);
-      
+
       v0=((float(AF)/1000)/((pointsA.getY(1)/1000)-(pointsA.getY(0)/1000)));
       //v0=(h/((pointsA.getY(1)/1000)/2));
       //v0=((float(AF))/(pointsA.getY(1)-pointsA.getY(0)));
@@ -103,6 +103,9 @@ if(startC=='@'){
         pointsX.add(t,x,"t: "+t+", x: "+x);
         pointsV.add(t,vt,"t: "+t+", vt: "+vt);
         println("x: "+x+" t: "+t);
+        TableRow newRow = tabla.addRow();
+        newRow.setFloat("x(m)",x);
+        newRow.setFloat("t(s)",t);
         //println(""+t);
       }
  /*     x=(float(AF)/1000);
@@ -111,15 +114,15 @@ if(startC=='@'){
          //vt=(pointsX.getY(i-1)-pointsX.getY(i))/(pointsX.getX(i-1)-pointsX.getX(i));
          //vt=x/(pointsX.getX(i)-pointsX.getX(i-1));
          //vt=x/(((pointsX.getX(i)-pointsX.getX(i-1)))/2);
-        
+
          vt=redondear(vt);
          pointsV.add(pointsX.getX(i-1),vt,"t: "+pointsX.getX(i-1)+", vt: "+vt);
-          println("vt: "+vt+" t: "+pointsX.getX(i-1));    
+          println("vt: "+vt+" t: "+pointsX.getX(i-1));
      }*/
-          
+
       plot1.setPoints(pointsV);
       plot.setPoints(pointsX);
-      //points.removeRange(0,nPoints);   
+      //points.removeRange(0,nPoints);
       anCad=" ";
       startC=' ';
     }

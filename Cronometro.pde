@@ -63,8 +63,8 @@ void setup(){
   bSalvar.fireAllEvents(true);
 
   tabla = new Table();// constructor of tabla Object
-  tabla.addColumn("Time");
-  tabla.addColumn("Volts");//Add columns
+  tabla.addColumn("t(s)");
+  tabla.addColumn("x(m)");//Add columns
   newRow = tabla.addRow();// add Row
 
   plot = new GPlot(this);// creamos la grafica
