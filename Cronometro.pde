@@ -59,7 +59,7 @@ void setup(){
     exit();
   }
   // agregamos boton para salvar los datos en .CSV
-  bSalvar = new GButton(this,340,45,100,35,"Salvar");
+  bSalvar = new GButton(this,540,225,100,35,"Salvar");
   bSalvar.fireAllEvents(true);
 
   tabla = new Table();// constructor of tabla Object
