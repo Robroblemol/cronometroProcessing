@@ -140,8 +140,9 @@ void handleButtonEvents(GButton Botton,GEvent event){
    saveTable(tabla,"data/"+save+".csv");
  }
 }
-String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",comCadA = "Acele",comCadV ="Veloc";
-int tf = 100,af = 0,tt =0;
+String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",
+comCadA = "Acele",comCadV ="Veloc",comCadT1 = "T1-> ";
+int tf = 1,af = 0,tt =0,t1=0;
 float a =0,v=0;
 void serialEvent(Serial p) {
   try {
@@ -149,7 +150,7 @@ void serialEvent(Serial p) {
 
     if(Cad.length()>=5){
       //println(Cad.substring(0,5));
-      println(Cad);
+      // println(Cad);
       if(Cad.substring(0,5).equals(comCadTF)==true){
         numS=Cad.substring(Cad.length()-3,Cad.length()-2);//menos dos al final para saltar el \n
         println("String:"+numS+"-");
@@ -179,6 +180,12 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         v=float(numS);
         println("dato velocidad detectado  = "+v);
+      }
+      if(Cad.substring(0,5).equals(comCadT1)==true){
+          numS=Cad.substring(Cad.length()-5,Cad.length()-2);//menos dos al final para saltar el \n
+          println("String:"+numS+"-");
+          t1=int(numS);
+          println("dato T1 detectado  = "+t1);
       }
     }
 
