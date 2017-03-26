@@ -91,34 +91,7 @@ void setup(){
 
 void draw(){
   background(162,160,160);// ajustamos color de fondo
-  // if(myPort.available()>1){// si el puerto serie esta habilido
-    // Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
-    // anCad+=Cad;// lo concatenamos a lo recivido anteriormente
-    // println(anCad);
-    // lastC=anCad.charAt(anCad.length()-1);//comparamos el final de la trama
-  //   if(lastC=='2'){// si es igual a %
-  //     flagdatV = true;// los datos recividos son de velocidad
-  //     println("dato aceleracion detectado");
-  //   }
-  //   else if (lastC=='!'){// si es igual a !
-  //     flagdatA = true;// los datos son de aceleracion
-  //   }
-  // }
-   // println (""+Cad);
-  if(flagdatV == true){// si los datos son de velocidad
-    println (anCad); // imprimimos datos por consola
-    println (anCad.charAt(1));
-    flagdatV = false;// flagdatv vuelve a falso
-    startC=anCad.charAt(1);//sacamos el primer caracter del string
-    datoVelocidad(startC);// lo enviamos a la funcion velocidad
-  }
-  if(flagdatA == true){//si los datos son de aceleracion
-    println (anCad); //imprimimos datos por consola
-   // println (anCad.charAt(1));
-    flagdatA = false;//flagdatv vuelve a falso
-    startC=anCad.charAt(1);//sacamos el primer caracter del string
-    datoAceleracion(startC);//lo enviamos a la funcion velocidad
-  }
+  
     //println("startC: "+startC);
     color c = color (0);// variable de color para el texto
     fill (c);// lo que escibamos a partir de aqui tendrá colo negro
