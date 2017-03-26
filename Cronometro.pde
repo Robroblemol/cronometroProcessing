@@ -174,6 +174,7 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         a=float(numS);
         println("dato aceleracion detectado  = "+a);
+        v=0;
         datoAceleracion(a,tt,t1,tf,af);
       }
       if(Cad.substring(0,5).equals(comCadV)==true){
@@ -181,6 +182,7 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         v=float(numS);
         println("dato velocidad detectado  = "+v);
+        a=0;
         datoVelocidad(v,tt);
       }
       if(Cad.substring(0,5).equals(comCadT1)==true){
