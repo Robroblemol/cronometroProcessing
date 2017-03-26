@@ -174,6 +174,7 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         a=float(numS);
         println("dato aceleracion detectado  = "+a);
+        datoAceleracion(a,tt,t1,tf,af);
       }
       if(Cad.substring(0,5).equals(comCadV)==true){
         numS=Cad.substring(Cad.length()-11,Cad.length()-6);//menos dos al final para saltar el \n
@@ -187,6 +188,7 @@ void serialEvent(Serial p) {
           t1=int(numS);
           println("dato T1 detectado  = "+t1);
       }
+
     }
 
   }
