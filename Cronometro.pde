@@ -88,7 +88,6 @@ void setup(){
   plot1.activatePointLabels();
   //plot1.activateZooming(1.5); // activamos zoom con el mouse
 }
-String comCad= "Tol:";
 
 void draw(){
   background(162,160,160);// ajustamos color de fondo
@@ -168,16 +167,44 @@ void handleButtonEvents(GButton Botton,GEvent event){
    saveTable(tabla,"data/"+save+".csv");
  }
 }
+String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",comCadA = "Acele";
+int tf = 100,af = 0,tt =0;
+float a =0;
 void serialEvent(Serial p) {
-  Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
-  //anCad+=Cad;// lo concatenamos a lo recivido anteriormente
-  println(Cad);
-  lastC=Cad.charAt(anCad.length()-1);//comparamos el final de la trama
-  if(lastC=='2'){// si es igual a %
-    flagdatV = true;// los datos recividos son de velocidad
-    println("dato aceleracion detectado");
+  try {
+    Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
+
+    if(Cad.length()>=5){
+      //println(Cad.substring(0,5));
+      //println(Cad);
+      if(Cad.substring(0,5).equals(comCadTF)==true){
+        numS=Cad.substring(Cad.length()-3,Cad.length()-2);//menos dos al final para saltar el \n
+        println("String:"+numS+"-");
+        tf = int(numS);
+        println("dato tiempo total detectado TF = "+tf);
+      }
+      if(Cad.substring(0,5).equals(comCadAF)==true){
+          numS=Cad.substring(Cad.length()-7,Cad.length()-5);//menos dos al final para saltar el \n
+          println("String:"+numS+"-");
+          af=int(numS);
+          println("dato ancho franja detectado AF = "+af);
+      }
+      if(Cad.substring(0,5).equals(comCadTT)==true){
+        numS=Cad.substring(Cad.length()-5,Cad.length()-2);//menos dos al final para saltar el \n
+        println("String:"+numS+"-");
+        tt=int(numS);
+        println("dato tiempo total detectado  = "+tt);
+      }
+      if(Cad.substring(0,5).equals(comCadA)==true){
+        numS=Cad.substring(Cad.length()-14,Cad.length()-8);//menos dos al final para saltar el \n
+        println("String:"+numS+"-");
+        a=float(numS);
+        println("dato aceleracion detectado  = "+a);
+      }
+    }
+
   }
-  else if (lastC=='!'){// si es igual a !
-    flagdatA = true;// los datos son de aceleracion
+  catch(RuntimeException e) {
+   println("error de "+e);
   }
-}
+ }
