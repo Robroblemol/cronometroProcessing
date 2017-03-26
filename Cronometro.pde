@@ -181,6 +181,7 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         v=float(numS);
         println("dato velocidad detectado  = "+v);
+        datoVelocidad(v,tt);
       }
       if(Cad.substring(0,5).equals(comCadT1)==true){
           numS=Cad.substring(Cad.length()-5,Cad.length()-2);//menos dos al final para saltar el \n
