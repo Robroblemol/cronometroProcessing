@@ -91,18 +91,18 @@ void setup(){
 
 void draw(){
   background(162,160,160);// ajustamos color de fondo
-  
+
     //println("startC: "+startC);
     color c = color (0);// variable de color para el texto
     fill (c);// lo que escibamos a partir de aqui tendrá colo negro
     textSize(47);//asignamos tamaño del texto para el titulo
     text("Resultados y Gráficos de los Datos Medidos ",32,100);// titulo con su posicion
     textSize(20);// asignamos tamaño para el resto del texto
-    text("Total de Fanjas Oscuras: "+TF,220,179);
-    text("Ancho de Fanjas: "+AF+" mm",220,214);
-    text("Tiempo Total: "+TT,533,179);
+    text("Total de Fanjas Oscuras: "+tf,220,179);
+    text("Ancho de Fanjas: "+af+" mm",220,214);
+    text("Tiempo Total: "+tt+"ms",533,179);
     text("Velocidad: "+V+" m/s",533,214);
-    text("Aceleración: "+A+"m/s",220,247);
+    text("Aceleración: "+a+"m/s",220,247);
     textSize(10);
     text("2",441,238);
 
