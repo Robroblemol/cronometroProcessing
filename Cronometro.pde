@@ -101,7 +101,7 @@ void draw(){
     text("Total de Fanjas Oscuras: "+tf,220,179);
     text("Ancho de Fanjas: "+af+" mm",220,214);
     text("Tiempo Total: "+tt+"ms",533,179);
-    text("Velocidad: "+V+" m/s",533,214);
+    text("Velocidad: "+v+" m/s",533,214);
     text("Aceleración: "+a+"m/s",220,247);
     textSize(10);
     text("2",441,238);
@@ -140,16 +140,16 @@ void handleButtonEvents(GButton Botton,GEvent event){
    saveTable(tabla,"data/"+save+".csv");
  }
 }
-String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",comCadA = "Acele";
+String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",comCadA = "Acele",comCadV ="Veloc";
 int tf = 100,af = 0,tt =0;
-float a =0;
+float a =0,v=0;
 void serialEvent(Serial p) {
   try {
     Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
 
     if(Cad.length()>=5){
       //println(Cad.substring(0,5));
-      //println(Cad);
+      println(Cad);
       if(Cad.substring(0,5).equals(comCadTF)==true){
         numS=Cad.substring(Cad.length()-3,Cad.length()-2);//menos dos al final para saltar el \n
         println("String:"+numS+"-");
@@ -173,6 +173,12 @@ void serialEvent(Serial p) {
         println("String:"+numS+"-");
         a=float(numS);
         println("dato aceleracion detectado  = "+a);
+      }
+      if(Cad.substring(0,5).equals(comCadV)==true){
+        numS=Cad.substring(Cad.length()-11,Cad.length()-6);//menos dos al final para saltar el \n
+        println("String:"+numS+"-");
+        v=float(numS);
+        println("dato velocidad detectado  = "+v);
       }
     }
 
