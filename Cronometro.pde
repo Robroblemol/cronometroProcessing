@@ -88,20 +88,23 @@ void setup(){
   plot1.activatePointLabels();
   //plot1.activateZooming(1.5); // activamos zoom con el mouse
 }
+String comCad= "Tol:";
 
 void draw(){
   background(162,160,160);// ajustamos color de fondo
-  if(myPort.available()>1){// si el puerto serie esta habilido
-    Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
-    anCad+=Cad;// lo concatenamos a lo recivido anteriormente
-    //println (""+anCad);
-    lastC=anCad.charAt(anCad.length()-1);//comparamos el final de la trama
-    if(lastC=='%'){// si es igual a %
-      flagdatV = true;// los datos recividos son de velocidad
-    }else if (lastC=='!'){// si es igual a !
-      flagdatA = true;// los datos son de aceleracion
-    }
-  }
+  // if(myPort.available()>1){// si el puerto serie esta habilido
+    // Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
+    // anCad+=Cad;// lo concatenamos a lo recivido anteriormente
+    // println(anCad);
+    // lastC=anCad.charAt(anCad.length()-1);//comparamos el final de la trama
+  //   if(lastC=='2'){// si es igual a %
+  //     flagdatV = true;// los datos recividos son de velocidad
+  //     println("dato aceleracion detectado");
+  //   }
+  //   else if (lastC=='!'){// si es igual a !
+  //     flagdatA = true;// los datos son de aceleracion
+  //   }
+  // }
    // println (""+Cad);
   if(flagdatV == true){// si los datos son de velocidad
     println (anCad); // imprimimos datos por consola
@@ -164,4 +167,17 @@ void handleButtonEvents(GButton Botton,GEvent event){
    save = showInputDialog("Digite nombre para guardar datoss");
    saveTable(tabla,"data/"+save+".csv");
  }
+}
+void serialEvent(Serial p) {
+  Cad=myPort.readString();//tomamos el nuevo valor en el puerto serie
+  //anCad+=Cad;// lo concatenamos a lo recivido anteriormente
+  println(Cad);
+  lastC=Cad.charAt(anCad.length()-1);//comparamos el final de la trama
+  if(lastC=='2'){// si es igual a %
+    flagdatV = true;// los datos recividos son de velocidad
+    println("dato aceleracion detectado");
+  }
+  else if (lastC=='!'){// si es igual a !
+    flagdatA = true;// los datos son de aceleracion
+  }
 }
