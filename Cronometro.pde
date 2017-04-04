@@ -87,7 +87,6 @@ void setup(){
 void draw(){
   background(162,160,160);// ajustamos color de fondo
 
-    //println("startC: "+startC);
     color c = color (0);// variable de color para el texto
     fill (c);// lo que escibamos a partir de aqui tendrá colo negro
     textSize(47);//asignamos tamaño del texto para el titulo
@@ -96,10 +95,19 @@ void draw(){
     text("Total de Fanjas Oscuras: "+tf,220,179);
     text("Ancho de Fanjas: "+af+" mm",220,214);
     text("Tiempo Total: "+tt+"ms",533,179);
-    text("Velocidad: "+v+" m/s",533,214);
-    text("Celeridad: "+a+"m/s",220,247);
-    textSize(10);
-    text("2",441,238);
+    if(tf>1){
+      text("Rapidez media: movimiento rectilinio uniforme acelerado",533,214);
+      text("Celeridad: "+a+"m/s",220,247);
+      textSize(10);
+      text("2",441,238);
+    }
+    else{
+      text("Rapidez media: "+v+" m/s",533,214);
+      text("Celeridad: movimiento uniforme",220,247);
+    }
+
+    // textSize(10);
+    // text("2",441,238);
 
      //plot.defaultDraw();
     plot.beginDraw();// iniciamos dibujo de grafica
