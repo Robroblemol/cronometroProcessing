@@ -10,8 +10,11 @@ GPointsArray pointsV = new GPointsArray(nPoints);
 
 for(int i =((tf*2)-1);i>0;i--){
   t=(float(tt)/1000)/i;
+  t=redondear(t);
   x=vi*t+(a*(t*t))/2;
+  x=redondear(x);
   v=vi+a*t;
+  v=redondear(v);
   pointsX.add(t,x,"t: "+t+", x: "+x);
   pointsV.add(t,v,"t: "+t+", vt: "+v);
   println("x: "+x+" t: "+t);
