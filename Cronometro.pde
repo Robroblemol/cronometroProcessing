@@ -7,13 +7,8 @@ import g4p_controls.*;//importamos libreria
  GPlot plot1; // declaro objeto grafica
  Serial myPort;// declaro pbjeto puerto serie
  GButton bSalvar;
-int nPoints = 6; // numero de puntos tipo entero
-//variables String para almacenar los datos enviados por el arduino
-String Cad,anCad=" ",TF="1",AF="10",TT= "00:00:000",TP="",V= "0.000",A = "0.000";
-// indicadores para tipo de medicion Velovidad o Aceleracion
-boolean flagdatV =false,flagdatA = false;
+ int nPoints = 6;
 final boolean debug = true;
-char lastC,startC;// variables para almacenar el ultimo caracter y el primero
 public PShape star;
 GPointsArray points = new GPointsArray(nPoints);// declaramos el array de puntos
 GPointsArray points1 = new GPointsArray(nPoints);
@@ -102,7 +97,7 @@ void draw(){
     text("Ancho de Fanjas: "+af+" mm",220,214);
     text("Tiempo Total: "+tt+"ms",533,179);
     text("Velocidad: "+v+" m/s",533,214);
-    text("Aceleración: "+a+"m/s",220,247);
+    text("Celeridad: "+a+"m/s",220,247);
     textSize(10);
     text("2",441,238);
 
@@ -131,17 +126,16 @@ void draw(){
     plot1.drawLabels();
     plot1.endDraw();
 
-
 }
 void handleButtonEvents(GButton Botton,GEvent event){
   String save = "new";
  if(Botton == bSalvar && event == GEvent.PRESSED){
-   save = showInputDialog("Digite nombre para guardar datoss");
+   save = showInputDialog("Digite nombre para guardar datos");
    saveTable(tabla,"data/"+save+".csv");
  }
 }
 String comCadTF= "Total",numS = "",comCadAF="Ancho",comCadTT="Tiemp",
-comCadA = "Acele",comCadV ="Veloc",comCadT1 = "T1-> ";
+comCadA = "Acele",comCadV ="Veloc",comCadT1 = "T1-> ",Cad = "";
 int tf = 1,af = 0,tt =0,t1=0;
 float a =0,v=0;
 void serialEvent(Serial p) {
